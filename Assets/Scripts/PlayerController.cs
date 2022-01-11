@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    Animator animator;
     bool isMoving;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         if (isMoving == false)
@@ -17,8 +24,15 @@ public class PlayerController : MonoBehaviour
                 y = 0;
             }
 
-            StartCoroutine(Move(new Vector2(x, y)));
+            if (x != 0 || y != 0)
+            {
+                animator.SetFloat("InputX", x);
+                animator.SetFloat("InputY", y);
+
+                StartCoroutine(Move(new Vector2(x, y)));
+            }
         }
+        animator.SetBool("IsMoving", isMoving);
     }
 
     IEnumerator Move(Vector3 direction)
