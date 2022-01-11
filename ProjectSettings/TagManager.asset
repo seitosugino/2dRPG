@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3691975585
+    locked: 0
+  - name: SolidObjects
+    uniqueID: 473373661
+    locked: 0
+  - name: Actor
+    uniqueID: 821307419
+    locked: 0
