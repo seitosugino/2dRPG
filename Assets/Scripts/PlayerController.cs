@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] LayerMask solidObjectsLayer;
     Animator animator;
     bool isMoving;
 
@@ -39,6 +40,11 @@ public class PlayerController : MonoBehaviour
     {
         isMoving = true;
         Vector3 targetPos = transform.position + direction;
+        if (IsWalkable(targetPos) == false)
+        {
+            isMoving = false;
+            yield break;
+        }
         while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, 5f*Time.deltaTime);
@@ -47,5 +53,9 @@ public class PlayerController : MonoBehaviour
 
         transform.position = targetPos;
         isMoving = false;
+    }
+    bool IsWalkable(Vector3 targetPos)
+    {
+        return Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer) == false;
     }
 }
