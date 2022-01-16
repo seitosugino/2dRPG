@@ -53,7 +53,18 @@ public class PlayerController : MonoBehaviour
 
         transform.position = targetPos;
         isMoving = false;
+
+        CheckForEncounts();
     }
+
+    void CheckForEncounts()
+    {
+        if (Random.Range(0,100) < 10)
+        {
+            Debug.Log("!");
+        }   
+    }
+
     bool IsWalkable(Vector3 targetPos)
     {
         return Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer) == false;
